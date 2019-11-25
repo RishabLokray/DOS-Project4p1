@@ -17,7 +17,7 @@ defmodule Project4p1 do
     #Inittialize all the clients as genservers.
   def spawnClients(count,numClients,numMessages)do
     userName = Integer.to_string(count)
-    pid = spawn(fn -> Client.start_link(userName,numClients,numMessages) end)
+    pid = Client.start_link(userName,Integer.to_string(numClients),Integer.to_string(numMessages))
     :ets.insert(:MainDatabase, {userName, pid})
     if (count != numClients) do spawnClients(count+1,numClients,numMessages) end
   end
